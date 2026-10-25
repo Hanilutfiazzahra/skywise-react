@@ -1,0 +1,4 @@
+import { BookOpen, Tag, Pencil, Trash2 } from 'lucide-react';
+export default function LessonCard({ lesson, index, onSelect, view, onEdit, onDelete }) {
+ return <article className="lesson-row"><div className="lesson-number">{String(index+1).padStart(2,'0')}</div><div className="lesson-symbol">{lesson.icon||'📘'}</div><div className="lesson-copy"><h3>{lesson.title}</h3><p>{lesson.description}</p><span className="lesson-theme"><Tag size={13}/>{lesson.theme}</span></div>{view==='user'?<button className="lesson-action" onClick={()=>onSelect?.(lesson)}><BookOpen size={15}/> Baca materi</button>:<div className="admin-row-actions"><button className="button button-quiet" type="button" onClick={()=>onEdit?.(lesson)}><Pencil size={15}/> Edit</button><button className="button button-quiet admin-delete" type="button" onClick={()=>onDelete?.(lesson)}><Trash2 size={15}/> Hapus</button></div>}</article>
+}

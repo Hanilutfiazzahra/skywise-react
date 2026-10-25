@@ -1,0 +1,5 @@
+import { ListFilter, Orbit } from 'lucide-react';
+import LessonCard from './LessonCard.jsx';
+export default function LessonList({ lessons, view = 'user', onSelect, onEdit, onDelete }) {
+ return <section className="panel list-panel" id="materi"><div className="list-heading"><div><div className="section-kicker"><ListFilter size={14}/> PERPUSTAKAAN SKYWISE</div><h2>{view==='admin'?'Daftar Materi':'Daftar Materi Pembelajaran'}</h2><p>{view==='admin'?'Materi yang ditambahkan pada sesi ini.':'Pilih materi yang ingin kamu pelajari.'}</p></div><span className="count-pill">{lessons.length} materi</span></div>{lessons.length===0?<div className="empty-state"><div className="empty-orbit"><Orbit size={30} strokeWidth={1.5}/></div><h3>Belum ada data Materi Pembelajaran</h3><p>{view==='admin'?'Gunakan formulir untuk menambahkan materi pertama.':'Materi akan muncul di sini setelah tersedia.'}</p></div>:<div className="lesson-list">{lessons.map((lesson,index)=><LessonCard key={lesson.id} lesson={lesson} index={index} onSelect={onSelect} view={view} onEdit={onEdit} onDelete={onDelete}/>)}</div>}</section>
+}
