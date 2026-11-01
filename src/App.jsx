@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import LessonForm from './components/LessonForm.jsx';
 import LessonList from './components/LessonList.jsx';
 import Footer from './components/Footer.jsx';
+import GalleryPage from './components/GalleryPage.jsx';
 import { ArrowLeft, BookOpen, Compass, Globe2, LockKeyhole, LogOut, MoonStar, Orbit, ShieldCheck, Sparkles, Star, Sun } from 'lucide-react';
 
 const funFacts = {
@@ -138,6 +139,7 @@ export default function App() {
         <PageHeading eyebrow="MATERI TERSIMPAN" title="Bookmark Saya" description="Materi yang kamu simpan supaya gampang dibaca lagi."/>
         <LessonList lessons={bookmarkedLessons} view="user" onSelect={(lesson) => { setSelectedLesson(lesson); setPage('detail'); }}/>
       </>}
+      {page === 'gallery' && <GalleryPage />}
       {page === 'detail' && <>
         <button className="back-link" onClick={() => setPage('lessons')}><ArrowLeft size={16}/> Kembali ke Daftar Materi</button>
         {selectedLesson ? <article className="panel detail-panel"><div className="lesson-symbol detail-symbol">{selectedLesson.icon || '📘'}</div><div className="section-kicker">{selectedLesson.theme}</div><h1>{selectedLesson.title}</h1><p>{selectedLesson.description}</p><div className="detail-bookmark-action"><button className="button button-quiet" onClick={() => toggleBookmark(selectedLesson)}>{bookmarks.includes(selectedLesson.id) ? '★ Hapus dari Bookmark' : '☆ Simpan Bookmark'}</button>{!loggedIn && <span>Login diperlukan untuk menyimpan materi.</span>}</div><div className="detail-content"><div className="section-kicker">MATERI SINGKAT</div><h2>Yang perlu kamu ketahui</h2><p>{selectedLesson.content || selectedLesson.description}</p></div><div className="fun-fact-box"><div className="fun-fact-icon">💡</div><div><div className="fun-fact-label">TAHUKAH KAMU?</div><h2>Fakta kecil, wawasan baru</h2><p>{selectedLesson.funFact || funFacts[selectedLesson.id] || 'Alam semesta menyimpan banyak hal menarik. Coba cari tahu fakta lain tentang topik ini!'}</p></div></div><div className="think-box"><span>🧭</span><div><b>Yuk, eksplorasi lagi</b><p>{lessonExtras[selectedLesson.id]?.explore || 'Coba cari hubungan materi ini dengan hal-hal yang kamu lihat di langit.'}</p></div></div></article> : <div className="panel empty-state"><h3>Belum ada materi untuk dibuka</h3><p>Pilih materi dari daftar setelah tersedia.</p></div>}
